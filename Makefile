@@ -6,7 +6,7 @@
 #    By: vpeinado <victor@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/10 21:29:39 by vpeinado          #+#    #+#              #
-#    Updated: 2024/06/10 21:36:06 by vpeinado         ###   ########.fr        #
+#    Updated: 2024/06/11 22:58:56 by vpeinado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,11 @@ INC			= -I ./inc/
 
 #Source files
 SRC_DIR	= src/
-SRC 	= $(shell find $(SRC_DIR) -type f -iname "*.cpp" | sed 's|^src/||')
+SRC 	= $(shell find $(SRC_DIR) -type f -iname "*.c" | sed 's|^src/||')
 
 #Object files
 OBJ_DIR	= obj/
-OBJ		= $(SRC:.cpp=.o)
+OBJ		= $(SRC:.c=.o)
 OBJS 	= $(addprefix $(OBJ_DIR), $(OBJ))
 
 all: obj $(NAME)
@@ -43,7 +43,7 @@ all: obj $(NAME)
 obj:
 	@rsync -av --include '*/' --exclude '*' --quiet $(SRC_DIR) $(OBJ_DIR)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.cpp | $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@ 
 
 $(NAME): $(OBJS)

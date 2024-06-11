@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vpeinado <victor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 21:29:54 by vpeinado          #+#    #+#             */
-/*   Updated: 2024/06/11 23:22:41 by vpeinado         ###   ########.fr       */
+/*   Created: 2024/06/11 23:19:33 by vpeinado          #+#    #+#             */
+/*   Updated: 2024/06/11 23:23:29 by vpeinado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/calc.h"
 
-int main(int argc, char **arg)
+int valid_args(char *ip, char *subnet)
 {
-    if (argc == 3 ) //&& valid_args(arg[1], arg[2]))
-        ipcalc(arg[1], arg[2]);
-    else
-    {
-        printf("Invalid arguments\n");
-        printf("Usage: ./IPcalculator [Ip] [Subnet or CDIR] \n");
-    }
-    return (0);
-}
+    (void)subnet;
+    int i;
+    int dots;
+    int slash;
 
+    i = 0;
+    dots = 0;
+    slash = 0;
+    while (ip[i])
+    {
+        if (ip[i] == '.')
+            dots++;
+        i++;
+    }
+    i = 0;
+    if (dots != 3 || slash != 1)
+        return (0);
+    return (1);
+}
