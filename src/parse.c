@@ -6,7 +6,7 @@
 /*   By: vpeinado <victor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 23:19:33 by vpeinado          #+#    #+#             */
-/*   Updated: 2024/06/13 10:34:23 by vpeinado         ###   ########.fr       */
+/*   Updated: 2024/06/16 17:16:50 by vpeinado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ int valid_subnet(char *subnet)
 {
     struct in_addr addr;
     
+    /*
+    * Usaremos la función 'inet_pton' para convertir la dirección IP en formato de cadena en una estructura de dirección de red en formato binario.
+     Sus argumentos son:
+         - AF_INET: Indica que la dirección IP es de tipo IPv4.
+        - subnet: La dirección IP en formato de cadena.
+        - &addr: La dirección de la estructura de dirección de red en formato binario.
+    */
     if (inet_pton(AF_INET, subnet, &addr) == -1)
         return (1);
     if (is_cidr(subnet))
