@@ -6,7 +6,7 @@
 /*   By: vpeinado <victor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 22:55:29 by vpeinado          #+#    #+#             */
-/*   Updated: 2024/06/13 11:17:23 by vpeinado         ###   ########.fr       */
+/*   Updated: 2024/06/16 16:28:37 by vpeinado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 * la libreria 'arpa/inet.h' es una biblioteca de C que proporciona funciones para manipular direcciones de red en formato binario y de texto.
 * 'inet_aton' convierte la dirección IP en formato de cadena en una estructura de dirección de red en formato binario.
-* 'inet_ntoa¡ convierte la dirección de red en formato binario en una dirección IP en formato de cadena.
+* 'inet_ntoa' convierte la dirección de red en formato binario en una dirección IP en formato de cadena.
 * 's_addr' es un campo de la estructura in_addr que contiene la dirección IP en formato binario.
 * 'inet_pton' convierte la dirección IP en formato de cadena en una estructura de dirección de red en formato binario.
 * usaremos ntohl para convertir la dirección IP de formato network a formato de host, para realizar la operacion aritmetica.
@@ -35,6 +35,18 @@ Formato de Host y Formato de Red:
  
 */
 
+void print_binary(unsigned int n)
+{
+    int i = 32;
+    while (i--)
+    {
+        printf("%d", (n >> i) & 1);
+        if (i % 8 == 0 && i != 0)
+            printf(".");
+    }
+}
+
+
 void ipcalc(char *ip, char *subnet)
 {
     struct in_addr ip_addr;
@@ -51,8 +63,12 @@ void ipcalc(char *ip, char *subnet)
     first_host.s_addr = htonl(ntohl(network_addr.s_addr) + 1);
     last_host.s_addr = htonl(ntohl(broadcast_addr.s_addr) - 1);
     printf("IP Address: %s\n", inet_ntoa(ip_addr));
-    printf("Subnet Mask: %s\n", inet_ntoa(subnet_addr));
-    printf("Network Address: %s\n", inet_ntoa(network_addr));
+    printf("IP en binario:\n ");
+    print_binary(ntohl(ip_addr.s_addr));
+    printf("\nSubnet Mask: %s\n", inet_ntoa(subnet_addr));
+    printf("Subnet en binario:\n ");
+    print_binary(ntohl(subnet_addr.s_addr));
+    printf("\nNetwork Address: %s\n", inet_ntoa(network_addr));
     printf("Broadcast Address: %s\n", inet_ntoa(broadcast_addr));
     printf("First Host: %s\n", inet_ntoa(first_host));
     printf("Last Host: %s\n", inet_ntoa(last_host));
