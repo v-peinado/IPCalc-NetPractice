@@ -6,7 +6,7 @@
 /*   By: vpeinado <victor@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 22:55:29 by vpeinado          #+#    #+#             */
-/*   Updated: 2024/06/16 17:20:28 by vpeinado         ###   ########.fr       */
+/*   Updated: 2025/05/06 22:46:06 by vpeinado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ void ipcalc(char *ip, char *subnet)
     */
     first_host.s_addr = htonl(ntohl(network_addr.s_addr) + 1);
     last_host.s_addr = htonl(ntohl(broadcast_addr.s_addr) - 1);
-    printf("IP Address: %s\n", inet_ntoa(ip_addr));
-    printf("IP en binario:\n ");
+    printf("%s%sIP Address:%s %s\n", BOLD, BLUE, RESET, inet_ntoa(ip_addr));
+    printf("%sIP en binario:%s\n ", BLUE, RESET);
     print_binary(ntohl(ip_addr.s_addr));
-    printf("\nSubnet Mask: %s\n", inet_ntoa(subnet_addr));
-    printf("Subnet en binario:\n ");
+    printf("\n%s%sSubnet Mask:%s %s\n", BOLD, MAGENTA, RESET, inet_ntoa(subnet_addr));
+    printf("%sSubnet en binario:%s\n ", MAGENTA, RESET);
     print_binary(ntohl(subnet_addr.s_addr));
-    printf("\nNetwork Address: %s\n", inet_ntoa(network_addr));
-    printf("Broadcast Address: %s\n", inet_ntoa(broadcast_addr));
-    printf("First Host: %s\n", inet_ntoa(first_host));
-    printf("Last Host: %s\n", inet_ntoa(last_host));
+    printf("\n%s%sNetwork Address:%s %s\n", BOLD, CYAN, RESET, inet_ntoa(network_addr));
+    printf("%s%sBroadcast Address:%s %s\n", BOLD, YELLOW, RESET, inet_ntoa(broadcast_addr));
+    printf("%s%sFirst Host:%s %s\n", BOLD, GREEN, RESET, inet_ntoa(first_host));
+    printf("%s%sLast Host:%s %s\n", BOLD, GREEN, RESET, inet_ntoa(last_host));
 }
